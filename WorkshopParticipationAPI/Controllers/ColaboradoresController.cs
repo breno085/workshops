@@ -20,7 +20,7 @@ namespace WorkshopParticipationAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Colaborador>> Get()
         {
-            var colaboradores = _context.Colaboradores.ToList();
+            var colaboradores = _context.Colaboradores.AsNoTracking().ToList();
 
             if (colaboradores is null)
                 return NotFound("Colaboradores não encontrados");
@@ -31,7 +31,7 @@ namespace WorkshopParticipationAPI.Controllers
         [HttpGet("{id:int}", Name = "ObterColaborador")]
         public ActionResult<Colaborador> Get(int id)
         {
-            var colaborador = _context.Colaboradores.FirstOrDefault(c => c.Id == id);
+            var colaborador = _context.Colaboradores.AsNoTracking().FirstOrDefault(c => c.Id == id);
 
             if (colaborador is null)
                 return NotFound("Colaborador não encontrado");
@@ -43,6 +43,7 @@ namespace WorkshopParticipationAPI.Controllers
         public ActionResult GetWorkshopsPorColaborador(int id)
         {
             var workshopsPorColaborador = _context.Presencas
+                .AsNoTracking()
                 .Where(p => p.ColaboradorId == id)
                 .Select(p => new
                 {
