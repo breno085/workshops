@@ -40,7 +40,7 @@ namespace WorkshopParticipationAPI.Controllers
         }
 
         [HttpGet("{id:int}/colaboradores")]
-        public ActionResult<IEnumerable<Colaborador>> GetColaboradoresWorkshop(int id)
+        public ActionResult<IEnumerable<Colaborador>> GetColaboradoresPorWorkshop(int id)
         {
             var colaboradores = _context.Presencas
                 .AsNoTracking()

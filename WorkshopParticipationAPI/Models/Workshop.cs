@@ -8,8 +8,13 @@ namespace AtasAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public string? Nome { get; set; }
+        [StringLength(30)]
+        public string Nome { get; set; } = string.Empty;
+
+        [Required]
         public DateTime DataRealizacao { get; set; }
+
+        [StringLength(500)]
         public string Descricao { get; set; } = string.Empty;
 
         [JsonIgnore]
