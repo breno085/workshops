@@ -39,6 +39,20 @@ namespace WorkshopParticipationAPI.Controllers
             return Ok(workshop);
         }
 
+        [HttpGet("{id:int}/colaboradores")]
+        public ActionResult<IEnumerable<Colaborador>> GetColaboradoresWorkshop(int id)
+        {
+            var colaboradores = _context.Presencas.Where(p => p.WorkshopId == id)
+                .Select(p => p.Colaborador)
+                .Distinct()
+                .ToList();
+
+            if (colaboradores.Count == 0)
+                return NotFound("Nenhum colaborador encontrado para este workshop");
+
+            return Ok(colaboradores);
+        }
+
         [HttpPost]
         public ActionResult Post(Workshop workshop)
         {
@@ -60,16 +74,20 @@ namespace WorkshopParticipationAPI.Controllers
             _context.Entry(workshop).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return Ok(workshop);
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             var workshop = _context.Workshops.FirstOrDefault(c => c.Id == id);
-
             if (workshop is null)
                 return NotFound("workshop não encontrado");
+
+            var presencas = _context.Presencas.Where(p => p.WorkshopId == workshop.Id).ToList();
+            
+            _context.Presencas.RemoveRange(presencas);
+            _context.SaveChanges();
 
             _context.Remove(workshop);
             _context.SaveChanges();

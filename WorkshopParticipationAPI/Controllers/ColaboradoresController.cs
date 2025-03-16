@@ -39,11 +39,10 @@ namespace WorkshopParticipationAPI.Controllers
             return Ok(colaborador);
         }
 
-        //Obtém os Workshops que um colaborador já participou
-        [HttpGet("{id:int}/workshops")]
+        [HttpGet("{id:int}/workshops", Name = "ObterPresenca")]
         public ActionResult GetWorkshopsPorColaborador(int id)
         {
-            var workshops = _context.Presencas
+            var workshopsPorColaborador = _context.Presencas
                 .Where(p => p.ColaboradorId == id)
                 .Select(p => new
                 {
@@ -56,7 +55,10 @@ namespace WorkshopParticipationAPI.Controllers
                 .Distinct()
                 .ToList();
 
-            return Ok(workshops);
+            if (workshopsPorColaborador.Count == 0)
+                return NotFound();
+
+            return Ok(workshopsPorColaborador);
         }
 
         [HttpPost]
@@ -71,7 +73,25 @@ namespace WorkshopParticipationAPI.Controllers
             return new CreatedAtRouteResult("ObterColaborador", new { id = colaborador.Id, colaborador });
         }
 
+        [HttpPost("workshops")]
+        public IActionResult PostColaboradorNoWorkshop(Presenca presenca)
+        {
+            if (presenca is null)
+                return BadRequest();
 
+            bool colaboradorExiste = _context.Colaboradores.Any(c => c.Id == presenca.ColaboradorId);
+            if (!colaboradorExiste)
+                return NotFound("Colaborador não encontrado");
+
+            bool workshopExiste = _context.Workshops.Any(w => w.Id == presenca.WorkshopId);
+            if (!workshopExiste)
+                return NotFound("Workshop não encontrado");
+
+            _context.Presencas.Add(presenca);
+            _context.SaveChanges();
+
+            return new CreatedAtRouteResult("ObterPresenca", new { id = presenca.Id, presenca });
+        }
 
         [HttpPut("{id:int}")]
         public ActionResult Put(int id, Colaborador colaborador)
@@ -83,7 +103,7 @@ namespace WorkshopParticipationAPI.Controllers
             _context.Entry(colaborador).State = EntityState.Modified;
             _context.SaveChanges();
 
-            return Ok(colaborador);
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]
@@ -97,6 +117,21 @@ namespace WorkshopParticipationAPI.Controllers
                 return NotFound("Colaborador não encontrado");
 
             _context.Remove(colaborador);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete("{id:int}/workshops/{workshopId:int}")]
+        public ActionResult DeleteColaboradorNumWorkshop(int id, int workshopId)
+        {
+            var presencaColaboradorWorkshop = _context.Presencas.
+                FirstOrDefault(p => p.ColaboradorId == id && p.WorkshopId == workshopId);
+
+            if (presencaColaboradorWorkshop is null)
+                return NotFound("Presenca do colaborador no workshop não encontrada");
+
+            _context.Remove(presencaColaboradorWorkshop);
             _context.SaveChanges();
 
             return Ok();
