@@ -67,7 +67,6 @@ namespace WorkshopParticipationAPI.Controllers
         public ActionResult Delete(int id)
         {
             var workshop = _context.Workshops.FirstOrDefault(c => c.Id == id);
-            //var workshop = _context.Workshops.Find(id); - outra forma
 
             if (workshop is null)
                 return NotFound("workshop não encontrado");
