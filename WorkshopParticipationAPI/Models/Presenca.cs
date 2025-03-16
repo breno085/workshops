@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace AtasAPI.Models
 {
@@ -8,10 +9,14 @@ namespace AtasAPI.Models
 
         [ForeignKey("Colaborador")]
         public int ColaboradorId { get; set; }
+        
+        [JsonIgnore]
         public Colaborador? Colaborador { get; set; }
 
         [ForeignKey("Workshop")]
         public int WorkshopId { get; set; }
+
+        [JsonIgnore]
         public Workshop? Workshop { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AtasAPI.Models
 {
@@ -11,6 +12,7 @@ namespace AtasAPI.Models
         public DateTime DataRealizacao { get; set; }
         public string Descricao { get; set; } = string.Empty;
 
+        [JsonIgnore]
         public ICollection<Presenca>? ColaboradorWorkshops { get; set; }
     }
 }

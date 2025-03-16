@@ -111,7 +111,6 @@ namespace WorkshopParticipationAPI.Controllers
         {
             var colaborador = _context.Colaboradores.FirstOrDefault(c => c.Id == id);
             //Outra forma:
-            //var workshop = _context.Workshops.Find(id);
 
             if (colaborador is null)
                 return NotFound("Colaborador não encontrado");
