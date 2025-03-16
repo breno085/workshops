@@ -1,5 +1,6 @@
 using AtasAPI.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using WorkshopParticipationAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IWorkshopRepository, WorkshopRepository>();
 
 var app = builder.Build();
 

@@ -2,7 +2,7 @@
 using AtasAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using WorkshopParticipationAPI.Repositories;
 
 namespace WorkshopParticipationAPI.Controllers
 {
@@ -10,17 +10,17 @@ namespace WorkshopParticipationAPI.Controllers
     [ApiController]
     public class WorkshopsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IWorkshopRepository _workshopRepository;
 
-        public WorkshopsController(AppDbContext context)
+        public WorkshopsController(IWorkshopRepository workshopRepository)
         {
-            _context = context;
+            _workshopRepository = workshopRepository;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Workshop>> Get()
+        public ActionResult<IEnumerable<Workshop>> GetAll()
         {
-            var workshops = _context.Workshops.AsNoTracking().ToList();
+            var workshops = _workshopRepository.GetAll();
 
             if (workshops is null)
                 return NotFound("Workshops não encontrados");
@@ -29,9 +29,9 @@ namespace WorkshopParticipationAPI.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterWorkshop")]
-        public ActionResult<Workshop> Get(int id)
+        public ActionResult<Workshop> GetById(int id)
         {
-            var workshop = _context.Workshops.AsNoTracking().FirstOrDefault(c => c.Id == id);
+            var workshop = _workshopRepository.GetById(id);
 
             if (workshop is null)
                 return NotFound("Workshop não encontrado");
@@ -42,14 +42,9 @@ namespace WorkshopParticipationAPI.Controllers
         [HttpGet("{id:int}/colaboradores")]
         public ActionResult<IEnumerable<Colaborador>> GetColaboradoresPorWorkshop(int id)
         {
-            var colaboradores = _context.Presencas
-                .AsNoTracking()
-                .Where(p => p.WorkshopId == id)
-                .Select(p => p.Colaborador)
-                .Distinct()
-                .ToList();
+            var colaboradores = _workshopRepository.GetColaboradoresPorWorkshop(id);
 
-            if (colaboradores.Count == 0)
+            if (!colaboradores.Any())
                 return NotFound("Nenhum colaborador encontrado para este workshop");
 
             return Ok(colaboradores);
@@ -61,8 +56,7 @@ namespace WorkshopParticipationAPI.Controllers
             if (workshop is null)
                 return BadRequest();
 
-            _context.Workshops.Add(workshop);
-            _context.SaveChanges();
+            _workshopRepository.Add(workshop);
 
             return new CreatedAtRouteResult("ObterWorkshop", new { id = workshop.Id, workshop });
         }
@@ -73,8 +67,7 @@ namespace WorkshopParticipationAPI.Controllers
             if (id != workshop.Id)
                 return BadRequest();
 
-            _context.Entry(workshop).State = EntityState.Modified;
-            _context.SaveChanges();
+            _workshopRepository.Update(workshop);
 
             return NoContent();
         }
@@ -82,17 +75,12 @@ namespace WorkshopParticipationAPI.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var workshop = _context.Workshops.FirstOrDefault(c => c.Id == id);
+            var workshop = _workshopRepository.GetById(id);
+
             if (workshop is null)
                 return NotFound("workshop não encontrado");
 
-            var presencas = _context.Presencas.Where(p => p.WorkshopId == workshop.Id).ToList();
-            
-            _context.Presencas.RemoveRange(presencas);
-            _context.SaveChanges();
-
-            _context.Remove(workshop);
-            _context.SaveChanges();
+            _workshopRepository.Delete(workshop);
 
             return Ok();
         }
