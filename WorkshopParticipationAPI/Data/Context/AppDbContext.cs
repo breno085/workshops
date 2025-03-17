@@ -13,7 +13,7 @@ namespace AtasAPI.Data.Context
 
         public DbSet<Colaborador> Colaboradores { get; set; }
 
-        public DbSet<Workshop> Workshops { get; set; }
+        public DbSet<Models.Workshop> Workshops { get; set; }
 
         public DbSet<Presenca> Presencas { get; set; }
     }

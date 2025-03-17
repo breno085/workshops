@@ -11,12 +11,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
+builder.Services.AddScoped<IWorkshopRepository, WorkshopRepository>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IWorkshopRepository, WorkshopRepository>();
-
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var colaboradorRepo = scope.ServiceProvider.GetRequiredService<IColaboradorRepository>();
+    Console.WriteLine(colaboradorRepo != null ? "Injeção funcionando!" : "Falha na injeção!");
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -18,7 +18,7 @@ namespace WorkshopParticipationAPI.Repositories
             return _context.Workshops.AsNoTracking().ToList();
         }
 
-        public Workshop GetById(int id)
+        public AtasAPI.Models.Workshop GetById(int id)
         {
             return _context.Workshops.AsNoTracking().FirstOrDefault(w => w.Id == id)!;
         }
@@ -35,7 +35,7 @@ namespace WorkshopParticipationAPI.Repositories
             _context.SaveChanges();
         }
 
-        public void Delete(Workshop workshop)
+        public void Delete(AtasAPI.Models.Workshop workshop)
         {
             var presencas = _context.Presencas.Where(p => p.WorkshopId == workshop.Id).ToList();
 
@@ -46,6 +46,20 @@ namespace WorkshopParticipationAPI.Repositories
             _context.SaveChanges();
         }
 
+        public Presenca DeleteColaboradorNoWorkshop(int workshopId, int colaboradorId)
+        {
+            var presencaColaboradorWorkshop = _context.Presencas
+                .FirstOrDefault(p => p.ColaboradorId == colaboradorId && p.WorkshopId == workshopId);
+
+            if (presencaColaboradorWorkshop != null)
+            {
+                _context.Presencas.Remove(presencaColaboradorWorkshop);
+                _context.SaveChanges();
+            }
+
+            return presencaColaboradorWorkshop!;
+        }
+
         public IEnumerable<Colaborador> GetColaboradoresPorWorkshop(int id)
         {
             return _context.Presencas
@@ -54,6 +68,17 @@ namespace WorkshopParticipationAPI.Repositories
                 .Select(p => p.Colaborador)
                 .Distinct()
                 .ToList()!;
+        }
+
+        public IEnumerable<Presenca> GetWorkshopsColaboradores()
+        {
+            return _context.Presencas.AsNoTracking().ToList();
+        }
+
+        public void PostColaboradorNoWorkshop(Presenca presenca)
+        {
+            _context.Presencas.Add(presenca);
+            _context.SaveChanges();
         }
     }
 }

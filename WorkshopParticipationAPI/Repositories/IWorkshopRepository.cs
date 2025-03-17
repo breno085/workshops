@@ -1,4 +1,5 @@
 ﻿using AtasAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WorkshopParticipationAPI.Repositories
 {
@@ -10,5 +11,8 @@ namespace WorkshopParticipationAPI.Repositories
         void Update(Workshop workshop);
         void Delete(Workshop workshop);
         IEnumerable<Colaborador> GetColaboradoresPorWorkshop(int id);
+        IEnumerable<Presenca> GetWorkshopsColaboradores();
+        void PostColaboradorNoWorkshop(Presenca presenca);
+        Presenca DeleteColaboradorNoWorkshop(int workshopId, int colaboradorId);
     }
 }
