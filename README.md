@@ -103,5 +103,5 @@ cd Frontend
    - Ou usar um servidor local simples (como Live Server do VS Code)
 
 ## Observações
-- O frontend ainda não está conectado à API
-- Não são necessárias instalações adicionais para o frontend no momento
+- Inicialmente, considerei um endpoint /api/presencas para gerenciar a participação dos colaboradores nos workshops de forma modular. No entanto, para atender aos requisitos do desafio, essa relação foi integrada aos endpoints existentes
+- O frontend ainda não foi conectado à API
