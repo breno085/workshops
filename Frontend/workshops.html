@@ -4,54 +4,257 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workshops</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .detalhes {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .detalhes h2 {
+            color: #0d6efd;
+        }
+        .detalhes ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .detalhes ul li {
+            margin-bottom: 5px;
+        }
+        .btn-workshop {
+            background-color: #f8f9fa;
+            color: #000;
+        }
+        .btn-workshop:hover {
+            background-color: #e2e6ea;
+        }
+
+        #pieChart {
+            max-width: 400px;  /* Define um limite de largura para o gráfico */
+            max-height: 400px; /* Define um limite de altura para o gráfico */
+        }
+        #pieChartContainer {
+            margin-top: 20px; /* Ajuste a margem superior conforme necessário */
+            margin-bottom: 20px; /* Ajuste a margem inferior conforme necessário */
+            display: flex;
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            align-items: center; /* Centraliza o conteúdo verticalmente */
+            text-align: center; /* Centraliza o texto */
+        }
+
+    </style>
 </head>
 <body>
-    <a href="index.html">Home</a>
-    <h1>Lista de Workshops</h1>
 
-    <!-- Botões clicáveis para os workshops -->
-    <button onclick="mostrarDetalhes('workshop1')">Workshop de Web Design</button>
-    <button onclick="mostrarDetalhes('workshop2')">Workshop de Desenvolvimento Mobile</button>
-    <button onclick="mostrarDetalhes('workshop3')">Workshop de Marketing Digital</button>
+    <!-- Header com links de navegação -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001f3f;">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Fast Soluções</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="colaboradores.html">Colaboradores</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="workshops.html">Workshops</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Detalhes dos Workshops (inicialmente ocultos) -->
-    <div id="workshop1" class="detalhes" style="display:none;">
-        <h2>Workshop de Web Design</h2>
-        <p><strong>Data de Realização:</strong> 15 de Julho, 2024</p>
-        <p><strong>Descrição:</strong> Este workshop cobre os princípios básicos de design de sites e UI/UX. Os participantes aprenderão como criar interfaces eficazes e responsivas.</p>
-        <h3>Colaboradores presentes:</h3>
-        <ul>
-            <li>João Silva</li>
-            <li>Maria Oliveira</li>
-            <li>Carlos Pereira</li>
-        </ul>
+    <!-- Conteúdo principal -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Workshops</h1>
+
+        <!-- Botões para exibir detalhes dos workshops -->
+        <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop1')">Workshop de Web Design</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop2')">Workshop de Desenvolvimento Mobile</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop3')">Workshop de Marketing Digital</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop4')">Workshop de Desenvolvimento Web</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop5')">Workshop de Métodos Ágeis</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop6')">Workshop de DevOps</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop7')">Workshop de Banco de Dados SQL</button>
+            <button class="btn btn-workshop" onclick="mostrarDetalhes('workshop8')">Workshop de Machine Learning</button>
+        </div>
+
+        <!-- Gráfico de Pizza -->
+        <div class="mb-5">
+            <h3 class="text-center">Quantidade de Colaboradores por Workshop</h3>
+            <div id="pieChartContainer">
+                <canvas id="pieChart" width="200" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Detalhes dos Workshops -->
+        <div id="workshop1" class="detalhes">
+            <h2>Workshop de Web Design</h2>
+            <p><strong>Data de Realização:</strong> 2 de Janeiro, 2025 - Quinta-feira às 16h</p>
+            <p><strong>Descrição:</strong> Este workshop cobre os princípios básicos de design de sites e UI/UX. Os participantes aprenderão como criar interfaces eficazes e responsivas.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>João Silva</li>
+                <li>Maria Oliveira</li>
+                <li>Carlos Pereira</li>
+                <li>Ana Costa</li>
+                <li>Ricardo Almeida</li>
+                <li>Fernanda Souza</li>
+            </ul>
+        </div>
+
+        <div id="workshop2" class="detalhes">
+            <h2>Workshop de Desenvolvimento Mobile</h2>
+            <p><strong>Data de Realização:</strong> 10 de Janeiro, 2025 - Sexta-feira às 10h</p>
+            <p><strong>Descrição:</strong> Neste workshop, os participantes aprenderão os fundamentos do desenvolvimento para plataformas móveis, como Android e iOS.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Luciana Martins</li>
+                <li>Tiago Almeida</li>
+                <li>Ana Souza</li>
+                <li>Roberto Costa</li>
+            </ul>
+        </div>
+
+        <div id="workshop3" class="detalhes">
+            <h2>Workshop de Marketing Digital</h2>
+            <p><strong>Data de Realização:</strong> 15 de Janeiro, 2025 - Quarta-feira às 14h</p>
+            <p><strong>Descrição:</strong> O workshop aborda estratégias de marketing digital, incluindo SEO, redes sociais, e-commerce e estratégias de tráfego pago.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>José Almeida</li>
+                <li>Camila Costa</li>
+                <li>Ana Silva</li>
+                <li>Ricardo Pereira</li>
+            </ul>
+        </div>
+
+        <div id="workshop4" class="detalhes">
+            <h2>Workshop de Desenvolvimento Web</h2>
+            <p><strong>Data de Realização:</strong> 20 de Janeiro, 2025 - Segunda-feira às 9h</p>
+            <p><strong>Descrição:</strong> O workshop é voltado para desenvolvedores que desejam aprender ou aprimorar suas habilidades no desenvolvimento de websites e aplicações web.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Fernanda Souza</li>
+                <li>Gabriel Pereira</li>
+                <li>Rafael Almeida</li>
+                <li>Claudia Oliveira</li>
+            </ul>
+        </div>
+
+        <div id="workshop5" class="detalhes">
+            <h2>Workshop de Métodos Ágeis</h2>
+            <p><strong>Data de Realização:</strong> 25 de Janeiro, 2025 - Sexta-feira às 17h</p>
+            <p><strong>Descrição:</strong> O workshop oferece uma introdução aos métodos ágeis de gestão de projetos, como Scrum, Kanban e outras abordagens ágeis.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Thiago Almeida</li>
+                <li>Roberta Costa</li>
+                <li>Paulo Lima</li>
+                <li>Márcia Silva</li>
+            </ul>
+        </div>
+
+        <div id="workshop6" class="detalhes">
+            <h2>Workshop de DevOps</h2>
+            <p><strong>Data de Realização:</strong> 30 de Janeiro, 2025 - Quinta-feira às 13h</p>
+            <p><strong>Descrição:</strong> O workshop aborda práticas e ferramentas para melhorar a integração e entrega contínuas de software.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Lucas Oliveira</li>
+                <li>Marcos Silva</li>
+                <li>Fernanda Costa</li>
+                <li>Jéssica Almeida</li>
+            </ul>
+        </div>
+
+        <div id="workshop7" class="detalhes">
+            <h2>Workshop de Banco de Dados SQL</h2>
+            <p><strong>Data de Realização:</strong> 5 de Fevereiro, 2025 - Terça-feira às 10h</p>
+            <p><strong>Descrição:</strong> O workshop oferece uma introdução ao SQL, com foco em consultas, administração e otimização de bancos de dados relacionais.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Gabriela Martins</li>
+                <li>Fábio Almeida</li>
+                <li>José Costa</li>
+                <li>Aline Souza</li>
+            </ul>
+        </div>
+
+        <div id="workshop8" class="detalhes">
+            <h2>Workshop de Machine Learning</h2>
+            <p><strong>Data de Realização:</strong> 10 de Fevereiro, 2025 - Segunda-feira às 15h</p>
+            <p><strong>Descrição:</strong> O workshop aborda as principais técnicas de Machine Learning, incluindo análise preditiva e classificação de dados.</p>
+            <h3>Colaboradores presentes:</h3>
+            <ul>
+                <li>Henrique Oliveira</li>
+                <li>Luciana Costa</li>
+                <li>Roberto Silva</li>
+                <li>João Pereira</li>
+            </ul>
+        </div>
+
     </div>
 
-    <div id="workshop2" class="detalhes" style="display:none;">
-        <h2>Workshop de Desenvolvimento Mobile</h2>
-        <p><strong>Data de Realização:</strong> 22 de Agosto, 2024</p>
-        <p><strong>Descrição:</strong> Este workshop foca no desenvolvimento de aplicativos móveis para Android e iOS. Vamos explorar ferramentas e práticas de desenvolvimento mobile.</p>
-        <h3>Colaboradores presentes:</h3>
-        <ul>
-            <li>Lucas Costa</li>
-            <li>Fernanda Souza</li>
-            <li>Ana Martins</li>
-        </ul>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div id="workshop3" class="detalhes" style="display:none;">
-        <h2>Workshop de Marketing Digital</h2>
-        <p><strong>Data de Realização:</strong> 10 de Setembro, 2024</p>
-        <p><strong>Descrição:</strong> Este workshop aborda estratégias de marketing digital, SEO e anúncios pagos, ajudando empresas a expandirem sua presença online.</p>
-        <h3>Colaboradores presentes:</h3>
-        <ul>
-            <li>Ricardo Almeida</li>
-            <li>Patrícia Silva</li>
-            <li>Diego Mendes</li>
-        </ul>
-    </div>
+    <script>
+        function mostrarDetalhes(workshopId) {
+            // Esconde todos os workshops
+            const workshops = document.querySelectorAll('.detalhes');
+            workshops.forEach(workshop => workshop.style.display = 'none');
 
-    <script src="js/script.js"></script>
+            // Mostra o workshop selecionado
+            const workshopSelecionado = document.getElementById(workshopId);
+            if (workshopSelecionado) {
+                workshopSelecionado.style.display = 'block';
+            }
+        }
+
+        // Dados para o gráfico de pizza
+        const data = {
+            labels: ['Web Design', 'Desenvolvimento Mobile', 'Marketing Digital', 'Desenvolvimento Web', 'Métodos Ágeis', 'DevOps', 'Banco de Dados SQL', 'Machine Learning'],
+            datasets: [{
+                label: 'Colaboradores',
+                data: [6, 6, 7, 8, 9, 7, 7, 9], // Quantidade de colaboradores em cada workshop
+                backgroundColor: [
+                    '#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0', '#ffb3e6', '#c2f0c2', '#ffb366'
+                ],
+                borderColor: '#fff',
+                borderWidth: 1
+            }]
+        };
+
+        // Configuração do gráfico de pizza
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' colaboradores';
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Criar o gráfico
+        const ctx = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+
 </body>
 </html>
