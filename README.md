@@ -86,6 +86,7 @@ INSERT INTO Presencas (ColaboradorId, WorkshopId) VALUES
    - No Visual Studio: Pressione F5 ou clique em "Start"
    - Via linha de comando: `dotnet watch run`
    - A documentação da API no swagger irá abrir no seu navegador
+   - Teste a API
 
 ### Frontend
 
