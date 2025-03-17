@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshops</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a href="index.html">Home</a>
+    <h1>Lista de Workshops</h1>
+
+    <!-- Botões clicáveis para os workshops -->
+    <button onclick="mostrarDetalhes('workshop1')">Workshop de Web Design</button>
+    <button onclick="mostrarDetalhes('workshop2')">Workshop de Desenvolvimento Mobile</button>
+    <button onclick="mostrarDetalhes('workshop3')">Workshop de Marketing Digital</button>
+
+    <!-- Detalhes dos Workshops (inicialmente ocultos) -->
+    <div id="workshop1" class="detalhes" style="display:none;">
+        <h2>Workshop de Web Design</h2>
+        <p><strong>Data de Realização:</strong> 15 de Julho, 2024</p>
+        <p><strong>Descrição:</strong> Este workshop cobre os princípios básicos de design de sites e UI/UX. Os participantes aprenderão como criar interfaces eficazes e responsivas.</p>
+        <h3>Colaboradores presentes:</h3>
+        <ul>
+            <li>João Silva</li>
+            <li>Maria Oliveira</li>
+            <li>Carlos Pereira</li>
+        </ul>
+    </div>
+
+    <div id="workshop2" class="detalhes" style="display:none;">
+        <h2>Workshop de Desenvolvimento Mobile</h2>
+        <p><strong>Data de Realização:</strong> 22 de Agosto, 2024</p>
+        <p><strong>Descrição:</strong> Este workshop foca no desenvolvimento de aplicativos móveis para Android e iOS. Vamos explorar ferramentas e práticas de desenvolvimento mobile.</p>
+        <h3>Colaboradores presentes:</h3>
+        <ul>
+            <li>Lucas Costa</li>
+            <li>Fernanda Souza</li>
+            <li>Ana Martins</li>
+        </ul>
+    </div>
+
+    <div id="workshop3" class="detalhes" style="display:none;">
+        <h2>Workshop de Marketing Digital</h2>
+        <p><strong>Data de Realização:</strong> 10 de Setembro, 2024</p>
+        <p><strong>Descrição:</strong> Este workshop aborda estratégias de marketing digital, SEO e anúncios pagos, ajudando empresas a expandirem sua presença online.</p>
+        <h3>Colaboradores presentes:</h3>
+        <ul>
+            <li>Ricardo Almeida</li>
+            <li>Patrícia Silva</li>
+            <li>Diego Mendes</li>
+        </ul>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
