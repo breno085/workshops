@@ -1,0 +1,37 @@
+.detalhes {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+.detalhes h2 {
+    color: #0d6efd;
+}
+.detalhes ul {
+    list-style-type: none;
+    padding: 0;
+}
+.detalhes ul li {
+    margin-bottom: 5px;
+}
+.btn-workshop {
+    background-color: #f8f9fa;
+    color: #000;
+}
+.btn-workshop:hover {
+    background-color: #e2e6ea;
+}
+
+#pieChart {
+    max-width: 400px;  /* Define um limite de largura para o gráfico */
+    max-height: 400px; /* Define um limite de altura para o gráfico */
+}
+#pieChartContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
