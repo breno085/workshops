@@ -1,5 +1,6 @@
 ﻿using AtasAPI.Data.Context;
 using AtasAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
