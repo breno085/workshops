@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// Adiciona a política de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -47,7 +46,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// Ativa o CORS
 app.UseCors("AllowAll");
 
 app.MapControllers();
