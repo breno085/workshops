@@ -1,7 +1,7 @@
-# Desafio FAST
+# Workshops
 
 ## Descrição
-Projeto desenvolvido para o desafio de estágio full stack da FAST.
+Aplicativo para rastreamento de participação em workshops.
 
 ### Backend
 - .NET C# para desenvolvimento da API
